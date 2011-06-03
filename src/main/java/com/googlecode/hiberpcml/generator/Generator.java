@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package com.googlecode.hiberpcmlgen;
+package com.googlecode.hiberpcml.generator;
 
 import com.googlecode.hiberpcml.Array;
 import com.googlecode.hiberpcml.Command;
@@ -35,11 +35,11 @@ import com.sun.codemodel.JPackage;
 import com.sun.codemodel.JType;
 import java.util.ArrayList;
 import java.util.HashMap;
-import com.googlecode.hiberpcmlgen.meta.Data;
-import com.googlecode.hiberpcmlgen.meta.Pcml;
-import com.googlecode.hiberpcmlgen.meta.Program;
-import com.googlecode.hiberpcmlgen.meta.Struct;
-import com.googlecode.hiberpcmlgen.meta.Util;
+import com.googlecode.hiberpcml.generator.meta.Data;
+import com.googlecode.hiberpcml.generator.meta.Pcml;
+import com.googlecode.hiberpcml.generator.meta.Program;
+import com.googlecode.hiberpcml.generator.meta.Struct;
+import com.googlecode.hiberpcml.generator.meta.Util;
 import com.sun.codemodel.JCodeModel;
 import com.sun.codemodel.JExpr;
 import com.sun.codemodel.JInvocation;

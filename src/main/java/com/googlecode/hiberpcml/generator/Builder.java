@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package com.googlecode.hiberpcmlgen;
+package com.googlecode.hiberpcml.generator;
 
 import java.io.File;
 import java.util.ArrayList;

@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package com.googlecode.hiberpcmlgen.meta;
+package com.googlecode.hiberpcml.generator.meta;
 
 import com.sun.codemodel.JDefinedClass;
 import com.sun.codemodel.JExpr;

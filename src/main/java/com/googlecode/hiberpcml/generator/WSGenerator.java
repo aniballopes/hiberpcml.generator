@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package com.googlecode.hiberpcmlgen;
+package com.googlecode.hiberpcml.generator;
 
 import com.googlecode.hiberpcml.Manager;
 import com.googlecode.hiberpcml.UsageType;
@@ -42,10 +42,10 @@ import java.util.Map.Entry;
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
 import javax.jws.WebService;
-import com.googlecode.hiberpcmlgen.meta.Data;
-import com.googlecode.hiberpcmlgen.meta.Pcml;
-import com.googlecode.hiberpcmlgen.meta.Program;
-import com.googlecode.hiberpcmlgen.meta.Util;
+import com.googlecode.hiberpcml.generator.meta.Data;
+import com.googlecode.hiberpcml.generator.meta.Pcml;
+import com.googlecode.hiberpcml.generator.meta.Program;
+import com.googlecode.hiberpcml.generator.meta.Util;
 
 /**
  *

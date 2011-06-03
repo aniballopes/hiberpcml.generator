@@ -21,83 +21,44 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package com.googlecode.hiberpcmlgen.meta;
+package com.googlecode.hiberpcml.generator.meta;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
  * @author John Arevalo <johnarevalo@gmail.com>
- * @see http://publib.boulder.ibm.com/infocenter/iseries/v5r4/topic/rzahh/pcmldttg.htm
+ * @see http://publib.boulder.ibm.com/infocenter/iseries/v5r4/topic/rzahh/pcmlsttg.htm
  */
-public class Data implements Serializable {
+public class Struct implements Serializable {
 
-    private String type;
-    private String bidiStringType;
-    private String ccsid;
-    private String charType;
-    private int count = 0;
-    private String init;
-    private String length;
+    private String name;
+    private String count;
     private String maxvrm;
     private String minvrm;
-    private String name;
     private String offset;
     private String offsetFrom;
     private String outputSize;
-    private String passby;
-    private String precision;
-    private String struct;
-    private String trim;
     private String usage;
     private String label;
+    private List<Data> dataElements = new ArrayList<Data>();
 
-    public String getBidiStringType() {
-        return bidiStringType;
+    public List<Data> getDataElements() {
+        return dataElements;
     }
 
-    public void setBidiStringType(String bidiStringType) {
-        this.bidiStringType = bidiStringType;
+    public void setDataElements(List<Data> dataElements) {
+        this.dataElements = dataElements;
     }
 
-    public String getCcsid() {
-        return ccsid;
-    }
-
-    public void setCcsid(String ccsid) {
-        this.ccsid = ccsid;
-    }
-
-    public String getCharType() {
-        return charType;
-    }
-
-    public void setCharType(String charType) {
-        this.charType = charType;
-    }
-
-    public int getCount() {
+    public String getCount() {
         return count;
     }
 
-    public void setCount(int count) {
+    public void setCount(String count) {
         this.count = count;
-    }
-
-    public String getInit() {
-        return init;
-    }
-
-    public void setInit(String init) {
-        this.init = init;
-    }
-
-    public String getLength() {
-        return length;
-    }
-
-    public void setLength(String length) {
-        this.length = length;
     }
 
     public String getMaxvrm() {
@@ -148,46 +109,6 @@ public class Data implements Serializable {
         this.outputSize = outputSize;
     }
 
-    public String getPassby() {
-        return passby;
-    }
-
-    public void setPassby(String passby) {
-        this.passby = passby;
-    }
-
-    public String getPrecision() {
-        return precision;
-    }
-
-    public void setPrecision(String precision) {
-        this.precision = precision;
-    }
-
-    public String getStruct() {
-        return struct;
-    }
-
-    public void setStruct(String struct) {
-        this.struct = struct;
-    }
-
-    public String getTrim() {
-        return trim;
-    }
-
-    public void setTrim(String trim) {
-        this.trim = trim;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
     public String getUsage() {
         return usage;
     }
@@ -196,15 +117,15 @@ public class Data implements Serializable {
         this.usage = usage;
     }
 
+    public void addData(Data data) {
+        dataElements.add(data);
+    }
+
     public String getLabel() {
         return label;
     }
 
     public void setLabel(String label) {
         this.label = label;
-    }
-
-    public boolean isStruct() {
-        return "struct".equals(type);
     }
 }
