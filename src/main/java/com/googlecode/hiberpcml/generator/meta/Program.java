@@ -26,12 +26,16 @@ package com.googlecode.hiberpcml.generator.meta;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlType;
 
 /**
  *
  * @author John Arevalo <johnarevalo@gmail.com>
  * @see http://publib.boulder.ibm.com/infocenter/iseries/v5r4/topic/rzahh/pcmlpgtg.htm
  */
+@XmlType
 public class Program implements Serializable {
 
     private String name;
@@ -41,9 +45,10 @@ public class Program implements Serializable {
     private String parseOrder;
     private String returnValue;
     private String label;
-    private boolean threadSafe = false;
+    private String threadSafe;
     private List<Data> dataElements = new ArrayList<Data>();
 
+    @XmlElement(name = "data")
     public List<Data> getDataElements() {
         return dataElements;
     }
@@ -52,6 +57,7 @@ public class Program implements Serializable {
         this.dataElements = dataElements;
     }
 
+    @XmlAttribute
     public String getEntryPoint() {
         return entryPoint;
     }
@@ -60,6 +66,7 @@ public class Program implements Serializable {
         this.entryPoint = entryPoint;
     }
 
+    @XmlAttribute
     public String getEpccsid() {
         return epccsid;
     }
@@ -68,6 +75,7 @@ public class Program implements Serializable {
         this.epccsid = epccsid;
     }
 
+    @XmlAttribute
     public String getName() {
         return name;
     }
@@ -76,6 +84,7 @@ public class Program implements Serializable {
         this.name = name;
     }
 
+    @XmlAttribute
     public String getParseOrder() {
         return parseOrder;
     }
@@ -84,6 +93,7 @@ public class Program implements Serializable {
         this.parseOrder = parseOrder;
     }
 
+    @XmlAttribute
     public String getPath() {
         return path;
     }
@@ -92,6 +102,7 @@ public class Program implements Serializable {
         this.path = path;
     }
 
+    @XmlAttribute
     public String getReturnValue() {
         return returnValue;
     }
@@ -100,11 +111,12 @@ public class Program implements Serializable {
         this.returnValue = returnValue;
     }
 
-    public boolean isThreadSafe() {
+    @XmlAttribute
+    public String isThreadSafe() {
         return threadSafe;
     }
 
-    public void setThreadSafe(boolean threadSafe) {
+    public void setThreadSafe(String threadSafe) {
         this.threadSafe = threadSafe;
     }
 
@@ -112,6 +124,7 @@ public class Program implements Serializable {
         dataElements.add(data);
     }
 
+    @XmlAttribute
     public String getLabel() {
         return label;
     }

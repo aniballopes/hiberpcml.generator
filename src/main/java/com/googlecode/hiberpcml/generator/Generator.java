@@ -88,7 +88,13 @@ public class Generator {
         Class type = null;
         JType jType = null;
 
-        if (data.getCount() > 0) {
+        int count = 0;
+        try {
+            count = Integer.parseInt(data.getCount());
+        } catch (Exception ex) {
+            //Ignore exception, count attribute is null
+        }
+        if (count > 0) {
             type = ArrayList.class;
         } else if (data.isStruct()) {
             jType = structClasses.get(data.getName());
@@ -117,7 +123,7 @@ public class Generator {
             usage = UsageType.OUTPUT;
         }
         //annotation
-        if (data.getCount() > 0) {
+        if (count > 0) {
             JAnnotationUse annotate = field.annotate(Array.class);
             annotate.param("pcmlName", data.getName());
             annotate.param("size", data.getCount());

@@ -24,6 +24,7 @@
 package com.googlecode.hiberpcml.generator.meta;
 
 import java.io.Serializable;
+import javax.xml.bind.annotation.XmlAttribute;
 
 /**
  *
@@ -36,7 +37,7 @@ public class Data implements Serializable {
     private String bidiStringType;
     private String ccsid;
     private String charType;
-    private int count = 0;
+    private String count;
     private String init;
     private String length;
     private String maxvrm;
@@ -52,6 +53,10 @@ public class Data implements Serializable {
     private String usage;
     private String label;
 
+    public Data() {
+    }
+
+    @XmlAttribute
     public String getBidiStringType() {
         return bidiStringType;
     }
@@ -60,6 +65,7 @@ public class Data implements Serializable {
         this.bidiStringType = bidiStringType;
     }
 
+    @XmlAttribute
     public String getCcsid() {
         return ccsid;
     }
@@ -68,6 +74,7 @@ public class Data implements Serializable {
         this.ccsid = ccsid;
     }
 
+    @XmlAttribute
     public String getCharType() {
         return charType;
     }
@@ -76,14 +83,16 @@ public class Data implements Serializable {
         this.charType = charType;
     }
 
-    public int getCount() {
+    @XmlAttribute
+    public String getCount() {
         return count;
     }
 
-    public void setCount(int count) {
+    public void setCount(String count) {
         this.count = count;
     }
 
+    @XmlAttribute
     public String getInit() {
         return init;
     }
@@ -92,6 +101,7 @@ public class Data implements Serializable {
         this.init = init;
     }
 
+    @XmlAttribute
     public String getLength() {
         return length;
     }
@@ -100,6 +110,7 @@ public class Data implements Serializable {
         this.length = length;
     }
 
+    @XmlAttribute
     public String getMaxvrm() {
         return maxvrm;
     }
@@ -108,6 +119,7 @@ public class Data implements Serializable {
         this.maxvrm = maxvrm;
     }
 
+    @XmlAttribute
     public String getMinvrm() {
         return minvrm;
     }
@@ -116,6 +128,7 @@ public class Data implements Serializable {
         this.minvrm = minvrm;
     }
 
+    @XmlAttribute
     public String getName() {
         return name;
     }
@@ -124,6 +137,7 @@ public class Data implements Serializable {
         this.name = name;
     }
 
+    @XmlAttribute
     public String getOffset() {
         return offset;
     }
@@ -132,6 +146,7 @@ public class Data implements Serializable {
         this.offset = offset;
     }
 
+    @XmlAttribute
     public String getOffsetFrom() {
         return offsetFrom;
     }
@@ -140,6 +155,7 @@ public class Data implements Serializable {
         this.offsetFrom = offsetFrom;
     }
 
+    @XmlAttribute
     public String getOutputSize() {
         return outputSize;
     }
@@ -148,6 +164,7 @@ public class Data implements Serializable {
         this.outputSize = outputSize;
     }
 
+    @XmlAttribute
     public String getPassby() {
         return passby;
     }
@@ -156,6 +173,7 @@ public class Data implements Serializable {
         this.passby = passby;
     }
 
+    @XmlAttribute
     public String getPrecision() {
         return precision;
     }
@@ -164,6 +182,7 @@ public class Data implements Serializable {
         this.precision = precision;
     }
 
+    @XmlAttribute
     public String getStruct() {
         return struct;
     }
@@ -172,6 +191,7 @@ public class Data implements Serializable {
         this.struct = struct;
     }
 
+    @XmlAttribute
     public String getTrim() {
         return trim;
     }
@@ -180,6 +200,7 @@ public class Data implements Serializable {
         this.trim = trim;
     }
 
+    @XmlAttribute
     public String getType() {
         return type;
     }
@@ -188,6 +209,7 @@ public class Data implements Serializable {
         this.type = type;
     }
 
+    @XmlAttribute
     public String getUsage() {
         return usage;
     }
@@ -196,6 +218,7 @@ public class Data implements Serializable {
         this.usage = usage;
     }
 
+    @XmlAttribute
     public String getLabel() {
         return label;
     }

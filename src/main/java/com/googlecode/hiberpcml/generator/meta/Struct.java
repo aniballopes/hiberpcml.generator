@@ -26,6 +26,8 @@ package com.googlecode.hiberpcml.generator.meta;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
 
 /**
  *
@@ -45,6 +47,10 @@ public class Struct implements Serializable {
     private String label;
     private List<Data> dataElements = new ArrayList<Data>();
 
+    public Struct() {
+    }
+
+    @XmlElement(name = "data")
     public List<Data> getDataElements() {
         return dataElements;
     }
@@ -53,6 +59,7 @@ public class Struct implements Serializable {
         this.dataElements = dataElements;
     }
 
+    @XmlAttribute
     public String getCount() {
         return count;
     }
@@ -61,6 +68,7 @@ public class Struct implements Serializable {
         this.count = count;
     }
 
+    @XmlAttribute
     public String getMaxvrm() {
         return maxvrm;
     }
@@ -69,6 +77,7 @@ public class Struct implements Serializable {
         this.maxvrm = maxvrm;
     }
 
+    @XmlAttribute
     public String getMinvrm() {
         return minvrm;
     }
@@ -77,6 +86,7 @@ public class Struct implements Serializable {
         this.minvrm = minvrm;
     }
 
+    @XmlAttribute
     public String getName() {
         return name;
     }
@@ -85,6 +95,7 @@ public class Struct implements Serializable {
         this.name = name;
     }
 
+    @XmlAttribute
     public String getOffset() {
         return offset;
     }
@@ -93,6 +104,7 @@ public class Struct implements Serializable {
         this.offset = offset;
     }
 
+    @XmlAttribute
     public String getOffsetFrom() {
         return offsetFrom;
     }
@@ -101,6 +113,7 @@ public class Struct implements Serializable {
         this.offsetFrom = offsetFrom;
     }
 
+    @XmlAttribute
     public String getOutputSize() {
         return outputSize;
     }
@@ -109,6 +122,7 @@ public class Struct implements Serializable {
         this.outputSize = outputSize;
     }
 
+    @XmlAttribute
     public String getUsage() {
         return usage;
     }
@@ -121,6 +135,7 @@ public class Struct implements Serializable {
         dataElements.add(data);
     }
 
+    @XmlAttribute
     public String getLabel() {
         return label;
     }

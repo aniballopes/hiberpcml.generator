@@ -29,8 +29,11 @@ import com.sun.codemodel.JMethod;
 import com.sun.codemodel.JMod;
 import com.sun.codemodel.JType;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.math.BigDecimal;
-import org.apache.commons.digester.Digester;
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
 
 /**
  *
@@ -38,6 +41,12 @@ import org.apache.commons.digester.Digester;
  */
 public class Util {
 
+    /**
+     * Get the class according with the type param
+     * @param type the type loaded from pcml definition
+     * @return  the class used to map the value
+     * @see http://publib.boulder.ibm.com/infocenter/iseries/v5r4/topic/rzahh/pcmldttg.htm
+     */
     public static Class getType(String type) {
         if (type == null) {
             return null;
@@ -61,30 +70,13 @@ public class Util {
     }
 
     public static Pcml load(File file) throws Exception {
-        Digester digester = new Digester();
-        digester.setValidating(false);
+        JAXBContext context = JAXBContext.newInstance(Pcml.class);
+        return (Pcml) context.createUnmarshaller().unmarshal(file);
+    }
 
-        digester.addObjectCreate("pcml", Pcml.class);
-        digester.addSetProperties("pcml");
-
-        digester.addObjectCreate("pcml/struct", Struct.class);
-        digester.addSetProperties("pcml/struct");
-        digester.addSetNext("pcml/struct", "addStruct");
-
-        digester.addObjectCreate("pcml/struct/data", Data.class);
-        digester.addSetProperties("pcml/struct/data");
-        digester.addSetNext("pcml/struct/data", "addData");
-
-
-        digester.addObjectCreate("pcml/program", Program.class);
-        digester.addSetProperties("pcml/program");
-        digester.addSetNext("pcml/program", "setProgram");
-
-        digester.addObjectCreate("pcml/program/data", Data.class);
-        digester.addSetProperties("pcml/program/data");
-        digester.addSetNext("pcml/program/data", "addData");
-
-        return (Pcml) digester.parse(file);
+    public static void store(Pcml pcml, String filename) throws JAXBException, FileNotFoundException {
+        JAXBContext context = JAXBContext.newInstance(Pcml.class);
+        context.createMarshaller().marshal(pcml, new FileOutputStream(filename));
     }
 
     public static String clean(String name) {

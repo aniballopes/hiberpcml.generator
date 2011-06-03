@@ -26,17 +26,24 @@ package com.googlecode.hiberpcml.generator.meta;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
  * @author John Arevalo <johnarevalo@gmail.com>
  */
+@XmlRootElement
 public class Pcml implements Serializable {
 
     private String version = "4.0";
     private String webMethodName = "";
     private Program program;
     private List<Struct> structElements = new ArrayList<Struct>();
+
+    public Pcml() {
+    }
 
     public Program getProgram() {
         return program;
@@ -46,6 +53,7 @@ public class Pcml implements Serializable {
         this.program = program;
     }
 
+    @XmlAttribute
     public String getVersion() {
         return version;
     }
@@ -54,6 +62,7 @@ public class Pcml implements Serializable {
         this.version = version;
     }
 
+    @XmlElement(name = "struct")
     public List<Struct> getStructElements() {
         return structElements;
     }
@@ -66,6 +75,7 @@ public class Pcml implements Serializable {
         structElements.add(struct);
     }
 
+    @XmlAttribute
     public String getWebMethodName() {
         return webMethodName;
     }
