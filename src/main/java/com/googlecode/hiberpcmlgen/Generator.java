@@ -26,6 +26,7 @@ package com.googlecode.hiberpcmlgen;
 import com.googlecode.hiberpcml.Array;
 import com.googlecode.hiberpcml.Command;
 import com.googlecode.hiberpcml.Element;
+import com.googlecode.hiberpcml.UsageType;
 import com.sun.codemodel.JAnnotationUse;
 import com.sun.codemodel.JDefinedClass;
 import com.sun.codemodel.JFieldVar;
@@ -39,6 +40,10 @@ import com.googlecode.hiberpcmlgen.meta.Pcml;
 import com.googlecode.hiberpcmlgen.meta.Program;
 import com.googlecode.hiberpcmlgen.meta.Struct;
 import com.googlecode.hiberpcmlgen.meta.Util;
+import com.sun.codemodel.JCodeModel;
+import com.sun.codemodel.JExpr;
+import com.sun.codemodel.JInvocation;
+import java.math.BigDecimal;
 
 /**
  *
@@ -92,10 +97,24 @@ public class Generator {
         }
 
         JFieldVar field;
+        //Creating initial value
         if (data.isStruct()) {
-            field = _class.field(JMod.PRIVATE, jType, data.getLabel());
+            field = _class.field(JMod.PRIVATE, jType, data.getLabel(), JExpr._new(jType));
         } else {
-            field = _class.field(JMod.PRIVATE, type, data.getLabel());
+            //TODO: validate if it is possible get refType without create new JCodeModel instance
+            JInvocation initial = JExpr._new(new JCodeModel()._ref(type));
+            if (type.equals(BigDecimal.class)) {
+                initial.arg("0");
+            }
+            field = _class.field(JMod.PRIVATE, type, data.getLabel(), initial);
+        }
+        //Identifying the usage 
+        UsageType usage = UsageType.INPUTOUTPUT;
+        if (data.getUsage().equals(UsageType.INPUT.value())) {
+            usage = UsageType.INPUT;
+        }
+        if (data.getUsage().equals(UsageType.OUTPUT.value())) {
+            usage = UsageType.OUTPUT;
         }
         //annotation
         if (data.getCount() > 0) {
@@ -103,10 +122,13 @@ public class Generator {
             annotate.param("pcmlName", data.getName());
             annotate.param("size", data.getCount());
             annotate.param("type", Util.getType(data.getType()));
+            annotate.param("usage", usage);
         } else {
             JAnnotationUse annotate = field.annotate(Element.class);
             annotate.param("pcmlName", data.getName());
+            annotate.param("usage", usage);
         }
+
         if (data.isStruct()) {
             Util.generateGetterAndSetter(_class, jType, data.getLabel());
         } else {

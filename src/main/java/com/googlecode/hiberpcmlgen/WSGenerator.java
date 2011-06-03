@@ -24,6 +24,7 @@
 package com.googlecode.hiberpcmlgen;
 
 import com.googlecode.hiberpcml.Manager;
+import com.googlecode.hiberpcml.UsageType;
 import com.sun.codemodel.JAnnotationUse;
 import com.sun.codemodel.JCodeModel;
 import com.sun.codemodel.JDefinedClass;
@@ -98,7 +99,8 @@ public class WSGenerator {
 
         //Setting params for webservice method
         for (Data data : pcml.getProgram().getDataElements()) {
-            if (Data.PARAM_MODE.equals(data.getMode())) {
+            if (UsageType.INPUT.value().equals(data.getUsage())
+                    || UsageType.INPUTOUTPUT.value().equals(data.getUsage())) {
                 if (data.isStruct()) {
                     structClass = generator.getStructClass(data.getName());
                     JVar param = method.param(structClass, data.getLabel());
@@ -155,7 +157,8 @@ public class WSGenerator {
         JDefinedClass complexClass = null;
 
         for (Data data : program.getDataElements()) {
-            if (Data.RETURN_MODE.equals(data.getMode())) {
+            if (UsageType.OUTPUT.value().equals(data.getUsage())
+                    || UsageType.INPUTOUTPUT.value().equals(data.getUsage())) {
                 if (returnClass != null) {
                     if (data.isStruct()) {
                         complexClass.field(JMod.PRIVATE, Util.getType(data.getType()), data.getLabel());

@@ -51,9 +51,6 @@ public class Data implements Serializable {
     private String trim;
     private String usage;
     private String label;
-    private String mode;
-    public static final String RETURN_MODE = "output";
-    public static final String PARAM_MODE = "input";
 
     public String getBidiStringType() {
         return bidiStringType;
@@ -205,14 +202,6 @@ public class Data implements Serializable {
 
     public void setLabel(String label) {
         this.label = label;
-    }
-
-    public String getMode() {
-        return mode;
-    }
-
-    public void setMode(String mode) {
-        this.mode = mode;
     }
 
     public boolean isStruct() {
