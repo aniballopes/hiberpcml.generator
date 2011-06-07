@@ -24,8 +24,6 @@
 package com.googlecode.hiberpcml.generator;
 
 import com.googlecode.hiberpcml.Array;
-import com.googlecode.hiberpcml.Command;
-import com.googlecode.hiberpcml.Element;
 import com.googlecode.hiberpcml.UsageType;
 import com.sun.codemodel.JAnnotationUse;
 import com.sun.codemodel.JDefinedClass;
@@ -84,7 +82,7 @@ public class Generator {
             addData(definedClass, data);
         }
 
-        annotate = definedClass.annotate(Command.class);
+        annotate = definedClass.annotate(com.googlecode.hiberpcml.Program.class);
         annotate.param("programName", program.getName());
         annotate.param("documentName", _package.name() + "." + program.getName());
         JResourceFile pcmlFile = new JResourceFile(program.getName() + ".pcml") {
@@ -147,7 +145,7 @@ public class Generator {
             annotate.param("type", Util.getType(data.getType()));
             annotate.param("usage", usage);
         } else {
-            JAnnotationUse annotate = field.annotate(Element.class);
+            JAnnotationUse annotate = field.annotate(com.googlecode.hiberpcml.Data.class);
             annotate.param("pcmlName", data.getName());
             annotate.param("usage", usage);
         }
