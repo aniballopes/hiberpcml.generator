@@ -35,6 +35,7 @@ import java.io.OutputStream;
 import java.math.BigDecimal;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
 
 /**
  *
@@ -82,7 +83,10 @@ public class Util {
 
     public static void store(Pcml pcml, OutputStream output) throws JAXBException {
         JAXBContext context = JAXBContext.newInstance(Pcml.class);
-        context.createMarshaller().marshal(pcml, output);
+        Marshaller marshaller = context.createMarshaller();
+        marshaller.setProperty("jaxb.fragment", Boolean.TRUE);
+        marshaller.setProperty("jaxb.formatted.output", Boolean.TRUE);        
+        marshaller.marshal(pcml, output);
     }
 
     public static String clean(String name) {
