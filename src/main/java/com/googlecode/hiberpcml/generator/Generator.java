@@ -143,7 +143,7 @@ public class Generator {
         if (count > 0) {
             JAnnotationUse annotate = field.annotate(Array.class);
             annotate.param("pcmlName", data.getName());
-            annotate.param("size", data.getCount());
+            annotate.param("size", count);
             annotate.param("type", Util.getType(data.getType()));
             annotate.param("usage", usage);
         } else {
