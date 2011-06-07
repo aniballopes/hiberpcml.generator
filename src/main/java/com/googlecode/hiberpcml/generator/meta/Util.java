@@ -31,6 +31,7 @@ import com.sun.codemodel.JType;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.OutputStream;
 import java.math.BigDecimal;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -77,6 +78,11 @@ public class Util {
     public static void store(Pcml pcml, String filename) throws JAXBException, FileNotFoundException {
         JAXBContext context = JAXBContext.newInstance(Pcml.class);
         context.createMarshaller().marshal(pcml, new FileOutputStream(filename));
+    }
+
+    public static void store(Pcml pcml, OutputStream output) throws JAXBException {
+        JAXBContext context = JAXBContext.newInstance(Pcml.class);
+        context.createMarshaller().marshal(pcml, output);
     }
 
     public static String clean(String name) {

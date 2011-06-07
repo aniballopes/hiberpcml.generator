@@ -33,6 +33,8 @@ import com.sun.codemodel.JFieldVar;
 import com.sun.codemodel.JMod;
 import com.sun.codemodel.JPackage;
 import com.sun.codemodel.JType;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import com.googlecode.hiberpcml.generator.meta.Data;
@@ -40,10 +42,13 @@ import com.googlecode.hiberpcml.generator.meta.Pcml;
 import com.googlecode.hiberpcml.generator.meta.Program;
 import com.googlecode.hiberpcml.generator.meta.Struct;
 import com.googlecode.hiberpcml.generator.meta.Util;
-import com.sun.codemodel.JCodeModel;
 import com.sun.codemodel.JExpr;
 import com.sun.codemodel.JInvocation;
+import com.sun.codemodel.JResourceFile;
 import java.math.BigDecimal;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.xml.bind.JAXBException;
 
 /**
  *
@@ -59,7 +64,7 @@ public class Generator {
         return structClasses.get(name);
     }
 
-    public void generate(JPackage _package, Pcml pcml) throws Exception {
+    public void generate(JPackage _package, final Pcml pcml) throws Exception {
 
         program = pcml.getProgram();
         definedClass = _package._class(program.getLabel());
@@ -81,7 +86,20 @@ public class Generator {
 
         annotate = definedClass.annotate(Command.class);
         annotate.param("programName", program.getName());
-        annotate.param("documentName", program.getName());
+        annotate.param("documentName", _package.name() + "." + program.getName());
+        JResourceFile pcmlFile = new JResourceFile(program.getName() + ".pcml") {
+
+            @Override
+            protected void build(OutputStream out) throws IOException {
+                try {
+                    Util.store(pcml, out);
+                } catch (JAXBException ex) {
+                    Logger.getLogger(Generator.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        };
+
+        _package.addResourceFile(pcmlFile);
     }
 
     public void addData(JDefinedClass _class, Data data) {
@@ -107,8 +125,7 @@ public class Generator {
         if (data.isStruct()) {
             field = _class.field(JMod.PRIVATE, jType, data.getLabel(), JExpr._new(jType));
         } else {
-            //TODO: validate if it is possible get refType without create new JCodeModel instance
-            JInvocation initial = JExpr._new(new JCodeModel()._ref(type));
+            JInvocation initial = JExpr._new(_class.owner()._ref(type));
             if (type.equals(BigDecimal.class)) {
                 initial.arg("0");
             }
