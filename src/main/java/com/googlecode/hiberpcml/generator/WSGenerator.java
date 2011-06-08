@@ -23,7 +23,7 @@
  */
 package com.googlecode.hiberpcml.generator;
 
-import com.googlecode.hiberpcml.Manager;
+import com.googlecode.hiberpcml.SessionManager;
 import com.googlecode.hiberpcml.UsageType;
 import com.sun.codemodel.JAnnotationUse;
 import com.sun.codemodel.JCodeModel;
@@ -72,7 +72,7 @@ public class WSGenerator {
         JAnnotationUse annotate = spiClass.annotate(WebService.class);
         annotate.param("name", name);
         annotate.param("serviceName", serviceName);
-        pcmlManager = spiClass.field(JMod.PRIVATE, Manager.class, "pcmlManager");
+        pcmlManager = spiClass.field(JMod.PRIVATE, SessionManager.class, "pcmlManager");
     }
 
     public void addMethod(Pcml pcml) throws Exception {
