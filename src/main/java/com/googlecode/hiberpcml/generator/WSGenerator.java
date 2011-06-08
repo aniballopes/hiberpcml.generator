@@ -23,6 +23,7 @@
  */
 package com.googlecode.hiberpcml.generator;
 
+import com.googlecode.hiberpcml.PcmlException;
 import com.googlecode.hiberpcml.SessionManager;
 import com.googlecode.hiberpcml.UsageType;
 import com.sun.codemodel.JAnnotationUse;
@@ -61,14 +62,14 @@ public class WSGenerator {
     /**
      * Initialize a Web Service Generator
      * @param packageName name of the package which contains the generated classes
-     * @param name The name of the web service. see {@link WebService#name()}
      * @param serviceName The service name of the Web Service. see {@link WebService#serviceName()}
+     * @param name The name of the web service. see {@link WebService#name()}
      * @throws Exception 
      */
-    public WSGenerator(String packageName, String name, String serviceName) throws Exception {
+    public WSGenerator(String packageName, String serviceName, String name) throws Exception {
         cm = new JCodeModel();
         _package = cm._package(packageName);
-        spiClass = _package._class(com.googlecode.hiberpcml.Util.toCamelCase(serviceName));
+        spiClass = _package._class(com.googlecode.hiberpcml.Util.toCamelCase(name));
         JAnnotationUse annotate = spiClass.annotate(WebService.class);
         annotate.param("name", name);
         annotate.param("serviceName", serviceName);
@@ -91,6 +92,7 @@ public class WSGenerator {
             returnClass = null;
         }
 
+        method._throws(PcmlException.class);
         method.annotate(WebMethod.class);
         JDefinedClass structClass;
         Class type;
@@ -169,7 +171,8 @@ public class WSGenerator {
                         Util.generateGetterAndSetter(complexClass, (Class) returnClass, data.getLabel());
                     }
                 } else {
-                    complexClass = _package._class(program.getLabel() + "ReturnType");
+                    String className = com.googlecode.hiberpcml.Util.toCamelCase(program.getLabel());
+                    complexClass = _package._class(className + "ReturnType");
                     if (data.isStruct()) {
                         returnClass = generator.getStructClass(data.getName());
                         complexClass.field(JMod.PRIVATE, Util.getType(data.getType()), data.getLabel());

@@ -65,7 +65,8 @@ public class Generator {
     public void generate(JPackage _package, final Pcml pcml) throws Exception {
 
         program = pcml.getProgram();
-        definedClass = _package._class(program.getLabel());
+        String className = com.googlecode.hiberpcml.Util.toCamelCase(program.getLabel());
+        definedClass = _package._class(className);
         JAnnotationUse annotate;
 
         //Load structs before load data types in Program
@@ -84,7 +85,7 @@ public class Generator {
 
         annotate = definedClass.annotate(com.googlecode.hiberpcml.Program.class);
         annotate.param("programName", program.getName());
-        annotate.param("documentName", _package.name() + "." + program.getName());
+        annotate.param("documentName", "META-INF." + program.getName());
         JResourceFile pcmlFile = new JResourceFile(program.getName() + ".pcml") {
 
             @Override
@@ -97,7 +98,7 @@ public class Generator {
             }
         };
 
-        _package.addResourceFile(pcmlFile);
+        _package.owner()._package("META-INF").addResourceFile(pcmlFile);
     }
 
     public void addData(JDefinedClass _class, Data data) {
