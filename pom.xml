@@ -35,4 +35,20 @@
             <type>jar</type>
         </dependency>
     </dependencies>
+    <licenses>
+        <license>
+            <url>http://www.opensource.org/licenses/mit-license.php</url>
+            <name>MIT License</name>
+        </license>
+    </licenses>
+    <scm>
+        <url>http://code.google.com/p/hiberpcml/source/browse/?repo=generator</url>
+        <connection>scm:hg:https://generator.hiberpcml.googlecode.com/hg/</connection>
+        <developerConnection>scm:hg:https://generator.hiberpcml.googlecode.com/hg/</developerConnection>
+    </scm>
+    <parent>
+        <groupId>net.java</groupId>
+        <artifactId>jvnet-parent</artifactId>
+        <version>1</version>
+    </parent>
 </project>
