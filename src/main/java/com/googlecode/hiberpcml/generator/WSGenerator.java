@@ -69,6 +69,16 @@ public class WSGenerator {
     public WSGenerator(String packageName, String serviceName, String name) throws Exception {
         cm = new JCodeModel();
         _package = cm._package(packageName);
+        init(serviceName, name);
+    }
+
+    public WSGenerator(JPackage _package, String serviceName, String name) throws Exception {
+        this._package = _package;
+        this.cm = this._package.owner();
+        init(serviceName, name);
+    }
+
+    private void init(String serviceName, String name) throws Exception {
         spiClass = _package._class(com.googlecode.hiberpcml.Util.toCamelCase(name));
         JAnnotationUse annotate = spiClass.annotate(WebService.class);
         annotate.param("name", name);
@@ -83,6 +93,9 @@ public class WSGenerator {
         JMethod method;
         JDefinedClass returnClass = getReturnClass(generator);
         JFieldVar returnField = null;
+        if (Util.isEmpty(pcml.getWebMethodName())) {
+            throw new GenerationException("webMethodName property can't be empty");
+        }
         if (returnClass.fields().size() > 1) {
             method = spiClass.method(JMod.PUBLIC, returnClass, pcml.getWebMethodName());
         } else {
