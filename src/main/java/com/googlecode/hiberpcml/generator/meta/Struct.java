@@ -32,7 +32,7 @@ import javax.xml.bind.annotation.XmlElement;
 /**
  *
  * @author John Arevalo <johnarevalo@gmail.com>
- * @see http://publib.boulder.ibm.com/infocenter/iseries/v5r4/topic/rzahh/pcmlsttg.htm
+ * @see <a href="http://publib.boulder.ibm.com/infocenter/iseries/v5r4/topic/rzahh/pcmlsttg.htm">PCML struct tag</a>
  */
 public class Struct implements Serializable {
 

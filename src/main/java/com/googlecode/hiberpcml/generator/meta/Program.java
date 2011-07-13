@@ -33,7 +33,7 @@ import javax.xml.bind.annotation.XmlType;
 /**
  *
  * @author John Arevalo <johnarevalo@gmail.com>
- * @see http://publib.boulder.ibm.com/infocenter/iseries/v5r4/topic/rzahh/pcmlpgtg.htm
+ * @see <a href="http://publib.boulder.ibm.com/infocenter/iseries/v5r4/topic/rzahh/pcmlpgtg.htm">PCML program tag</a>
  */
 @XmlType
 public class Program implements Serializable {

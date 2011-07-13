@@ -29,7 +29,7 @@ import javax.xml.bind.annotation.XmlAttribute;
 /**
  *
  * @author John Arevalo <johnarevalo@gmail.com>
- * @see http://publib.boulder.ibm.com/infocenter/iseries/v5r4/topic/rzahh/pcmldttg.htm
+ * @see <a href="http://publib.boulder.ibm.com/infocenter/iseries/v5r4/topic/rzahh/pcmldttg.htm">PCML data tag</a>
  */
 public class Data implements Serializable {
 

@@ -47,7 +47,7 @@ public class Util {
      * Get the class according with the type param
      * @param type the type loaded from pcml definition
      * @return  the class used to map the value
-     * @see http://publib.boulder.ibm.com/infocenter/iseries/v5r4/topic/rzahh/pcmldttg.htm
+     * @see <a href="http://publib.boulder.ibm.com/infocenter/iseries/v5r4/topic/rzahh/pcmldttg.htm">PCML type attribute</a>
      */
     public static Class getType(String type) {
         if (type == null) {
@@ -131,7 +131,6 @@ public class Util {
 
     /**
      * checks if string is empty
-     * @return
      */
     public static boolean isEmpty(String string) {
         return string == null || string.trim().isEmpty();
