@@ -73,7 +73,17 @@ public class Util {
 
     public static Pcml load(File file) throws Exception {
         JAXBContext context = JAXBContext.newInstance(Pcml.class);
-        return (Pcml) context.createUnmarshaller().unmarshal(file);
+        Pcml pcml = (Pcml) context.createUnmarshaller().unmarshal(file);
+        Program program = pcml.getProgram();
+        if (program == null || isEmpty(program.getLabel())) {
+            pcml.getProgram().setLabel(program.getName());
+        }
+        for (Data data : pcml.getProgram().getDataElements()) {
+            if (Util.isEmpty(data.getLabel())) {
+                data.setLabel(Util.clean(data.getName()));
+            }
+        }
+        return pcml;
     }
 
     public static void store(Pcml pcml, String filename) throws JAXBException, FileNotFoundException {
@@ -85,7 +95,7 @@ public class Util {
         JAXBContext context = JAXBContext.newInstance(Pcml.class);
         Marshaller marshaller = context.createMarshaller();
         marshaller.setProperty("jaxb.fragment", Boolean.TRUE);
-        marshaller.setProperty("jaxb.formatted.output", Boolean.TRUE);        
+        marshaller.setProperty("jaxb.formatted.output", Boolean.TRUE);
         marshaller.marshal(pcml, output);
     }
 
@@ -117,5 +127,13 @@ public class Util {
         JMethod setter = _class.method(JMod.PUBLIC, void.class, "set" + camelCased);
         setter.param(jType, name);
         setter.body().assign(JExpr._this().ref(name), JExpr.ref(name));
+    }
+
+    /**
+     * checks if string is empty
+     * @return
+     */
+    public static boolean isEmpty(String string) {
+        return string == null || string.trim().isEmpty();
     }
 }
