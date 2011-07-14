@@ -77,7 +77,7 @@ public final class Tool {
         JPackage _package = cm._package(cmd.getOptionValue("p", ""));
         Generator generator;
         WSGenerator wsGenerator = null;
-        File targetFile = new File(cmd.getOptionValue("d", "./target"));
+        File targetFile = new File(cmd.getOptionValue("t", "./target"));
 
         targetFile.mkdirs();
         if (cmd.hasOption("w")) {
