@@ -40,6 +40,7 @@ public class Pcml implements Serializable {
     private String version = "4.0";
     private String webMethodName = "";
     private Program program;
+    private String fileName;
     private List<Struct> structElements = new ArrayList<Struct>();
 
     public Pcml() {
@@ -82,5 +83,13 @@ public class Pcml implements Serializable {
 
     public void setWebMethodName(String webMethodName) {
         this.webMethodName = webMethodName;
+    }
+
+    public String getFileName() {
+        return fileName;
+    }
+
+    public void setFileName(String fileName) {
+        this.fileName = fileName;
     }
 }

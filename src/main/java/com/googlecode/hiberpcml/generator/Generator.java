@@ -86,7 +86,7 @@ public class Generator {
         annotate = definedClass.annotate(com.googlecode.hiberpcml.Program.class);
         annotate.param("programName", program.getName());
         annotate.param("documentName", "META-INF." + program.getName());
-        JResourceFile pcmlFile = new JResourceFile(program.getName() + ".pcml") {
+        JResourceFile pcmlFile = new JResourceFile(pcml.getFileName()) {
 
             @Override
             protected void build(OutputStream out) throws IOException {

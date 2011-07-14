@@ -75,6 +75,7 @@ public class Util {
         JAXBContext context = JAXBContext.newInstance(Pcml.class);
         Pcml pcml = (Pcml) context.createUnmarshaller().unmarshal(file);
         Program program = pcml.getProgram();
+        pcml.setFileName(file.getName());
         if (program == null || isEmpty(program.getLabel())) {
             pcml.getProgram().setLabel(program.getName());
         }
