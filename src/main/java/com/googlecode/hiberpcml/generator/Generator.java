@@ -111,6 +111,18 @@ public class Generator {
         } catch (Exception ex) {
             //Ignore exception, count attribute is null
         }
+
+        //Length for this data
+        int length = 0;
+        try {
+            length = Integer.parseInt(data.getLength());
+        } catch (Exception ex) {
+            //Ignore exception, length attribute is null
+        }
+
+        String completeWith =
+                data.getCompleteWith() == null ? "" : data.getCompleteWith();
+
         if (count > 0) {
             type = ArrayList.class;
         } else if (data.isStruct()) {
@@ -149,6 +161,10 @@ public class Generator {
             JAnnotationUse annotate = field.annotate(com.googlecode.hiberpcml.Data.class);
             annotate.param("pcmlName", data.getName());
             annotate.param("usage", usage);
+            if (length > 0 && completeWith.length() > 0) {
+                annotate.param("length", length);
+                annotate.param("completeWith", completeWith);
+            }
         }
 
         if (data.isStruct()) {

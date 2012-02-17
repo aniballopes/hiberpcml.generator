@@ -52,6 +52,7 @@ public class Data implements Serializable {
     private String trim;
     private String usage;
     private String label;
+    private String completeWith;
 
     public Data() {
     }
@@ -83,6 +84,15 @@ public class Data implements Serializable {
         this.charType = charType;
     }
 
+    @XmlAttribute
+    public String getCompleteWith() {
+        return completeWith;
+    }
+
+    public void setCompleteWith(String completeWith) {
+        this.completeWith = completeWith;
+    }
+    
     @XmlAttribute
     public String getCount() {
         return count;
