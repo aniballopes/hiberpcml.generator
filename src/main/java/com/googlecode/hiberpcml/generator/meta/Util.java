@@ -23,14 +23,8 @@
  */
 package com.googlecode.hiberpcml.generator.meta;
 
-import com.sun.codemodel.JDefinedClass;
-import com.sun.codemodel.JExpr;
-import com.sun.codemodel.JMethod;
-import com.sun.codemodel.JMod;
-import com.sun.codemodel.JType;
+import com.sun.codemodel.*;
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.OutputStream;
 import java.math.BigDecimal;
 import javax.xml.bind.JAXBContext;
@@ -87,16 +81,13 @@ public class Util {
         return pcml;
     }
 
-    public static void store(Pcml pcml, String filename) throws JAXBException, FileNotFoundException {
-        JAXBContext context = JAXBContext.newInstance(Pcml.class);
-        context.createMarshaller().marshal(pcml, new FileOutputStream(filename));
-    }
-
     public static void store(Pcml pcml, OutputStream output) throws JAXBException {
         JAXBContext context = JAXBContext.newInstance(Pcml.class);
         Marshaller marshaller = context.createMarshaller();
         marshaller.setProperty("jaxb.fragment", Boolean.TRUE);
         marshaller.setProperty("jaxb.formatted.output", Boolean.TRUE);
+        //Delete fileName property to be ignored in .pcml file 
+        pcml.setFileName(null);
         marshaller.marshal(pcml, output);
     }
 
