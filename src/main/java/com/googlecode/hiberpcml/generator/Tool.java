@@ -29,12 +29,7 @@ import com.sun.codemodel.JCodeModel;
 import com.sun.codemodel.JPackage;
 import java.io.File;
 import java.util.ArrayList;
-import org.apache.commons.cli.CommandLine;
-import org.apache.commons.cli.CommandLineParser;
-import org.apache.commons.cli.HelpFormatter;
-import org.apache.commons.cli.Option;
-import org.apache.commons.cli.Options;
-import org.apache.commons.cli.PosixParser;
+import org.apache.commons.cli.*;
 
 /**
  *
@@ -97,10 +92,13 @@ public final class Tool {
         cm.build(targetFile);
     }
 
-    private static ArrayList<File> getFilesToParse(String source) {
+    public static ArrayList<File> getFilesToParse(String source) {
+        return getFilesToParse(new File(source));
+    }
+
+    public static ArrayList<File> getFilesToParse(File sourceFile) {
         ArrayList<File> files = new ArrayList<File>();
-        File sourceFile = new File(source);
-        if (!sourceFile.exists()) {
+        if (sourceFile == null || !sourceFile.exists()) {
             return files;
         }
 

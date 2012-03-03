@@ -116,7 +116,7 @@ public class WSGenerator {
         for (Data data : pcml.getProgram().getDataElements()) {
             if (UsageType.INPUT.value().equals(data.getUsage())
                     || UsageType.INPUTOUTPUT.value().equals(data.getUsage())) {
-                if (data.isStruct()) {
+                if (data.isStructType()) {
                     structClass = generator.getStructClass(data.getName());
                     JVar param = method.param(structClass, data.getLabel());
                     JMethod setter = generatedClass.getMethod(
@@ -175,7 +175,7 @@ public class WSGenerator {
             if (UsageType.OUTPUT.value().equals(data.getUsage())
                     || UsageType.INPUTOUTPUT.value().equals(data.getUsage())) {
                 if (returnClass != null) {
-                    if (data.isStruct()) {
+                    if (data.isStructType()) {
                         complexClass.field(JMod.PRIVATE, Util.getType(data.getType()), data.getLabel());
                         Util.generateGetterAndSetter(complexClass, Util.getType(data.getType()), data.getLabel());
                     } else {
@@ -186,7 +186,7 @@ public class WSGenerator {
                 } else {
                     String className = com.googlecode.hiberpcml.Util.toCamelCase(program.getLabel());
                     complexClass = _package._class(className + "ReturnType");
-                    if (data.isStruct()) {
+                    if (data.isStructType()) {
                         returnClass = generator.getStructClass(data.getName());
                         complexClass.field(JMod.PRIVATE, Util.getType(data.getType()), data.getLabel());
                         Util.generateGetterAndSetter(complexClass, Util.getType(data.getType()), data.getLabel());

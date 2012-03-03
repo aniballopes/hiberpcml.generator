@@ -125,7 +125,7 @@ public class Generator {
 
         if (count > 0) {
             type = ArrayList.class;
-        } else if (data.isStruct()) {
+        } else if (data.isStructType()) {
             jType = structClasses.get(data.getName());
         } else {
             type = Util.getType(data.getType());
@@ -133,7 +133,7 @@ public class Generator {
 
         JFieldVar field;
         //Creating initial value
-        if (data.isStruct()) {
+        if (data.isStructType()) {
             field = _class.field(JMod.PRIVATE, jType, data.getLabel(), JExpr._new(jType));
         } else {
             JInvocation initial = JExpr._new(_class.owner()._ref(type));
@@ -167,7 +167,7 @@ public class Generator {
             }
         }
 
-        if (data.isStruct()) {
+        if (data.isStructType()) {
             Util.generateGetterAndSetter(_class, jType, data.getLabel());
         } else {
             Util.generateGetterAndSetter(_class, type, data.getLabel());
@@ -175,7 +175,7 @@ public class Generator {
     }
 
     public Object getType(Data data) {
-        if (data.isStruct()) {
+        if (data.isStructType()) {
             return structClasses.get(data.getName());
         } else {
             return Util.getType(data.getType());

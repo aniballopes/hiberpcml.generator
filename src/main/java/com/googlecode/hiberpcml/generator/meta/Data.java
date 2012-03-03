@@ -92,7 +92,7 @@ public class Data implements Serializable {
     public void setCompleteWith(String completeWith) {
         this.completeWith = completeWith;
     }
-    
+
     @XmlAttribute
     public String getCount() {
         return count;
@@ -237,7 +237,7 @@ public class Data implements Serializable {
         this.label = label;
     }
 
-    public boolean isStruct() {
+    public boolean isStructType() {
         return "struct".equals(type);
     }
 }
